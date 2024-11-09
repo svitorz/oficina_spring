@@ -27,14 +27,14 @@ import lombok.NoArgsConstructor;
  public class Aluno {
 
     @Id // chave primária
-    @GeneratedValue(strategy=GenerationType.IDENTITY)  // tipo de chave primária
+    @GeneratedValue(strategy=GenerationType.AUTO)  // tipo de chave primária
     Long matricula;
 
     @Column(
         unique = true,
         nullable= false
     )
-    String cpf_aluno;
+    String cpfAluno;
 
-    String nome_aluno, telefoneAluno, emailAluno, data_nasc;
+    String nomeAluno, telefoneAluno, emailAluno, dataNasc;
 }

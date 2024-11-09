@@ -6,6 +6,7 @@
 package br.com.cadastroalunos.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,4 +31,12 @@ public class AlunoService {
     public Aluno createAluno(Aluno aluno){
         return alunoRepository.save(aluno);
     } 
+
+    public Optional<Aluno> findById(Long matricula){
+        return alunoRepository.findById(matricula);
+    }
+
+    public void deleteAluno(Aluno aluno){
+        alunoRepository.delete(aluno);
+    }
 }
