@@ -18,4 +18,4 @@ target/
 .vscode/
 
 ## .env ##
-src/main/resources/.env
+.env
