@@ -15,6 +15,6 @@ import br.com.cadastroalunos.entity.Aluno;
  * @author vitor
  */
 @Repository
-public interface AlunoRepository extends JpaRepository<Long, Aluno> {
+public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 
 }
