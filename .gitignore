@@ -22,3 +22,6 @@ target/
 
 ## request in json file ##
 request.json
+
+## request scripts via curl ##
+requests.sh

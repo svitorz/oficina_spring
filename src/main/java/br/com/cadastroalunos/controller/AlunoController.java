@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cadastroalunos.entity.Aluno;
 import br.com.cadastroalunos.service.AlunoService;
+
 
 
 
@@ -35,14 +37,30 @@ public class AlunoController {
     public Aluno createAluno(@RequestBody Aluno aluno) {
         return alunoService.createAluno(aluno);
     }
-    @DeleteMapping
+    @DeleteMapping("/{matricula}")
     public ResponseEntity<?> deleteAluno(@PathVariable Long matricula){
         var aluno = alunoService.findById(matricula);
 
         if(aluno.isEmpty()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O aluno não foi encontrado.");
         }
+    
         alunoService.deleteAluno(aluno.get());
         return ResponseEntity.status(HttpStatus.OK).body("Aluno excluído com sucesso!");
+    }
+
+    @PutMapping("{matricula}")
+    public ResponseEntity<?> updateAluno(@PathVariable Long matricula, @RequestBody Aluno aluno) {
+        var alunoAtual = alunoService.findById(matricula);
+
+        if(alunoAtual.isEmpty()){ 
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("O aluno não foi encontrado!");
+        }
+        
+        aluno.setMatricula(alunoAtual.get().getMatricula());
+
+        return ResponseEntity.status(HttpStatus.OK).body(alunoService.createAluno(aluno));
     }
 }
